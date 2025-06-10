@@ -41,7 +41,7 @@ export default function Header() {
           <span className="font-headline text-2xl font-bold text-primary">NauticalMatch</span>
         </Link>
 
-        <nav className="hidden md:inline-flex items-center gap-1 md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2">
+        <nav className="hidden md:inline-flex items-center gap-1">
           {mainNavItems.map((item) => (
             <Button key={item.label} variant="ghost" asChild>
               <Link href={item.href} className="flex items-center gap-2 text-foreground hover:text-primary px-3 py-2">
@@ -92,10 +92,12 @@ export default function Header() {
                   if (item.type === 'separator') {
                     return <DropdownMenuSeparator key={item.key} className="my-2"/>;
                   }
+                  // Quick fix for item.icon being undefined for separator, though it shouldn't reach here.
+                  const IconComponent = item.icon || Info; 
                   return (
                     <Button key={item.label} variant="ghost" className="w-full justify-start" asChild>
                       <Link href={item.href} className="flex items-center gap-3 text-lg py-3">
-                        <item.icon className="h-5 w-5" />
+                        <IconComponent className="h-5 w-5" />
                         {item.label}
                       </Link>
                     </Button>
