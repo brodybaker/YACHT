@@ -173,7 +173,9 @@ export default function SignUpPage() {
           <p className="text-sm text-muted-foreground">
             Already have an account?{' '}
             <Button variant="link" asChild className="p-0 h-auto">
-              <Link href="/liked">Sign In</Link> {/* Assuming /liked is a gateway to auth for now */}
+              <Link href="/liked">
+                <span>Sign In</span> {/* Assuming /liked is a gateway to auth for now */}
+              </Link>
             </Button>
           </p>
         </CardFooter>
