@@ -10,17 +10,30 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Label } from '@/components/ui/label';
+import { Label } from '@/components/ui/label'; // Keep if used, but FormLabel is primary
 import { Card, CardContent, CardDescription, CardHeader, CardFooter, CardTitle } from '@/components/ui/card';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useToast } from '@/hooks/use-toast';
-import { UserCog, MapPin, Sailboat, Save, Loader2 } from 'lucide-react';
+import { UserCog, MapPin, Sailboat, Save, Loader2, Ruler } from 'lucide-react';
 
-const BOAT_TYPES = ['Sailboat', 'Motor Yacht', 'Catamaran', 'Speedboat', 'Fishing Boat'] as const;
+const BOAT_TYPES = [
+  'Sailboat', 'Motor Yacht', 'Catamaran', 'Speedboat', 'Fishing Boat', 
+  'Skiff', 'Pontoon', 'Center Console', 'Dinghy', 'RIB', 'Trawler', 'Cuddy Cabin'
+] as const;
 
 const profileFormSchema = z.object({
   location: z.string().min(2, { message: 'Location must be at least 2 characters.' }).max(50, { message: 'Location must be 50 characters or less.' }).optional().or(z.literal('')),
   boatPreferences: z.array(z.enum(BOAT_TYPES)).optional().default([]),
+  minLengthFt: z.coerce.number().positive({ message: "Min length must be positive." }).optional().or(z.literal('')),
+  maxLengthFt: z.coerce.number().positive({ message: "Max length must be positive." }).optional().or(z.literal('')),
+}).refine(data => {
+  if (data.minLengthFt && data.maxLengthFt) {
+    return Number(data.maxLengthFt) >= Number(data.minLengthFt);
+  }
+  return true;
+}, {
+  message: "Max length cannot be less than min length.",
+  path: ["maxLengthFt"], // Path to show error under
 });
 
 type ProfileFormValues = z.infer<typeof profileFormSchema>;
@@ -36,6 +49,8 @@ export default function ProfilePage() {
     defaultValues: {
       location: '',
       boatPreferences: [],
+      minLengthFt: '',
+      maxLengthFt: '',
     },
   });
 
@@ -44,6 +59,8 @@ export default function ProfilePage() {
     if (typeof window !== 'undefined') {
       const storedLocation = localStorage.getItem('yachtmob_userLocation');
       const storedBoatPreferences = localStorage.getItem('yachtmob_boatPreferences');
+      const storedMinLengthFt = localStorage.getItem('yachtmob_minLengthFt');
+      const storedMaxLengthFt = localStorage.getItem('yachtmob_maxLengthFt');
       
       if (storedLocation) {
         form.setValue('location', storedLocation);
@@ -57,6 +74,12 @@ export default function ProfilePage() {
         } catch (error) {
           console.error("Failed to parse boat preferences from localStorage", error);
         }
+      }
+      if (storedMinLengthFt) {
+        form.setValue('minLengthFt', parseFloat(storedMinLengthFt));
+      }
+      if (storedMaxLengthFt) {
+        form.setValue('maxLengthFt', parseFloat(storedMaxLengthFt));
       }
     }
   }, [form]);
@@ -72,9 +95,19 @@ export default function ProfilePage() {
         localStorage.removeItem('yachtmob_userLocation');
       }
       localStorage.setItem('yachtmob_boatPreferences', JSON.stringify(values.boatPreferences || []));
+      
+      if (values.minLengthFt) {
+        localStorage.setItem('yachtmob_minLengthFt', String(values.minLengthFt));
+      } else {
+        localStorage.removeItem('yachtmob_minLengthFt');
+      }
+      if (values.maxLengthFt) {
+        localStorage.setItem('yachtmob_maxLengthFt', String(values.maxLengthFt));
+      } else {
+        localStorage.removeItem('yachtmob_maxLengthFt');
+      }
     }
     
-    // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1000));
 
     setIsSubmitting(false);
@@ -82,8 +115,6 @@ export default function ProfilePage() {
       title: 'Profile Updated!',
       description: 'Your preferences have been saved.',
     });
-    // Optionally redirect or give further instructions
-    // router.push('/'); 
   }
 
   if (!isClient) {
@@ -101,7 +132,7 @@ export default function ProfilePage() {
         <CardHeader className="text-center">
           <UserCog className="h-16 w-16 text-primary mx-auto mb-4" />
           <CardTitle className="font-headline text-3xl">Your Profile</CardTitle>
-          <CardDescription>Manage your location and boat preferences.</CardDescription>
+          <CardDescription>Manage your location, boat, and length preferences.</CardDescription>
         </CardHeader>
         <CardContent>
           <Form {...form}>
@@ -130,7 +161,7 @@ export default function ProfilePage() {
                   Preferred Boat Types
                 </FormLabel>
                 <FormDescription className="mb-4">Select the types of boats you're interested in.</FormDescription>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-3">
                   {BOAT_TYPES.map((type) => (
                     <FormField
                       key={type}
@@ -152,7 +183,7 @@ export default function ProfilePage() {
                               }}
                             />
                           </FormControl>
-                          <FormLabel className="font-normal">
+                          <FormLabel className="font-normal text-sm">
                             {type}
                           </FormLabel>
                         </FormItem>
@@ -161,6 +192,42 @@ export default function ProfilePage() {
                   ))}
                 </div>
                 <FormMessage /> 
+              </FormItem>
+              
+              <FormItem>
+                 <FormLabel className="flex items-center text-lg mb-3">
+                  <Ruler className="mr-2 h-5 w-5 text-primary" />
+                  Preferred Length Range (ft)
+                </FormLabel>
+                <FormDescription className="mb-4">Specify your desired boat length. Both fields are optional.</FormDescription>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <FormField
+                    control={form.control}
+                    name="minLengthFt"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Min Length (ft)</FormLabel>
+                        <FormControl>
+                          <Input type="number" placeholder="e.g., 20" {...field} onChange={e => field.onChange(e.target.value === '' ? '' : parseFloat(e.target.value))} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="maxLengthFt"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Max Length (ft)</FormLabel>
+                        <FormControl>
+                          <Input type="number" placeholder="e.g., 50" {...field} onChange={e => field.onChange(e.target.value === '' ? '' : parseFloat(e.target.value))} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
               </FormItem>
               
               <CardFooter className="px-0 pt-4 pb-0">
@@ -185,3 +252,5 @@ export default function ProfilePage() {
     </div>
   );
 }
+
+    

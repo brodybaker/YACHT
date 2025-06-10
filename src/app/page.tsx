@@ -6,12 +6,15 @@ import type { Listing } from '@/types';
 import { mockListings } from '@/lib/mockData';
 import ListingCard from '@/components/listing/ListingCard';
 import { Button } from '@/components/ui/button';
-import { RotateCcw, ThumbsUp, MapPin, Sailboat, Filter } from 'lucide-react';
+import { RotateCcw, ThumbsUp, MapPin, Sailboat, Filter, Ruler } from 'lucide-react';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
-import { cn } from '@/lib/utils'; // Added missing import
+import { cn } from '@/lib/utils';
 
-const BOAT_TYPES = ['Sailboat', 'Motor Yacht', 'Catamaran', 'Speedboat', 'Fishing Boat'] as const;
+const BOAT_TYPES = [
+  'Sailboat', 'Motor Yacht', 'Catamaran', 'Speedboat', 'Fishing Boat',
+  'Skiff', 'Pontoon', 'Center Console', 'Dinghy', 'RIB', 'Trawler', 'Cuddy Cabin'
+] as const;
 
 
 export default function HomePage() {
@@ -20,8 +23,12 @@ export default function HomePage() {
   const [likedListingIds, setLikedListingIds] = useState<Set<string>>(new Set());
   const [dislikedListingIds, setDislikedListingIds] = useState<Set<string>>(new Set());
   const [isLoading, setIsLoading] = useState(true);
+  
   const [userLocation, setUserLocation] = useState<string | null>(null);
   const [boatPreferences, setBoatPreferences] = useState<typeof BOAT_TYPES[number][]>([]);
+  const [minLengthFt, setMinLengthFt] = useState<number | null>(null);
+  const [maxLengthFt, setMaxLengthFt] = useState<number | null>(null);
+  
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -31,9 +38,8 @@ export default function HomePage() {
     
     if (typeof window !== 'undefined') {
       const storedLocation = localStorage.getItem('yachtmob_userLocation');
-      if (storedLocation) {
-        setUserLocation(storedLocation);
-      }
+      if (storedLocation) setUserLocation(storedLocation);
+
       const storedBoatPreferences = localStorage.getItem('yachtmob_boatPreferences');
       if (storedBoatPreferences) {
         try {
@@ -45,8 +51,13 @@ export default function HomePage() {
           console.error("Failed to parse boat preferences from localStorage", error);
         }
       }
+
+      const storedMinLength = localStorage.getItem('yachtmob_minLengthFt');
+      if (storedMinLength) setMinLengthFt(parseFloat(storedMinLength));
+      
+      const storedMaxLength = localStorage.getItem('yachtmob_maxLengthFt');
+      if (storedMaxLength) setMaxLengthFt(parseFloat(storedMaxLength));
     }
-    // Load liked/disliked from localStorage if implemented (not part of this change)
   }, []);
 
   const processedListings = useMemo(() => {
@@ -59,25 +70,31 @@ export default function HomePage() {
       );
     }
 
-    // 2. Sort by user location if available
+    // 2. Filter by length range
+    if (minLengthFt !== null) {
+      listingsToProcess = listingsToProcess.filter(listing => listing.lengthFt >= minLengthFt);
+    }
+    if (maxLengthFt !== null) {
+      listingsToProcess = listingsToProcess.filter(listing => listing.lengthFt <= maxLengthFt);
+    }
+    
+    // 3. Sort by user location if available
     if (userLocation) {
       listingsToProcess.sort((a, b) => {
-        const aMatches = a.location.toLowerCase() === userLocation.toLowerCase();
-        const bMatches = b.location.toLowerCase() === userLocation.toLowerCase();
+        const aMatches = a.location.toLowerCase().includes(userLocation.toLowerCase());
+        const bMatches = b.location.toLowerCase().includes(userLocation.toLowerCase());
         if (aMatches && !bMatches) return -1;
         if (!aMatches && bMatches) return 1;
-        // For items not matching location, or both matching, keep relative order or sort by other criteria if needed
-        // For now, if boat preferences are active, ensure preferred types are maintained within location sort
         return 0; 
       });
     }
 
-    // 3. Filter by like/dislike
+    // 4. Filter by like/dislike
     listingsToProcess = listingsToProcess.filter(
       (listing) => !likedListingIds.has(listing.id) && !dislikedListingIds.has(listing.id)
     );
     return listingsToProcess;
-  }, [allListings, likedListingIds, dislikedListingIds, userLocation, boatPreferences]);
+  }, [allListings, likedListingIds, dislikedListingIds, userLocation, boatPreferences, minLengthFt, maxLengthFt]);
 
   const currentListing = processedListings.length > 0 && currentIndex < processedListings.length ? processedListings[currentIndex] : null;
 
@@ -114,12 +131,22 @@ export default function HomePage() {
     );
   }
   
-  const hasActiveFilters = userLocation || boatPreferences.length > 0;
+  const hasActiveFilters = userLocation || boatPreferences.length > 0 || minLengthFt !== null || maxLengthFt !== null;
+  
+  let lengthFilterText = '';
+  if (minLengthFt !== null && maxLengthFt !== null) {
+    lengthFilterText = `${minLengthFt} - ${maxLengthFt}ft`;
+  } else if (minLengthFt !== null) {
+    lengthFilterText = `Min ${minLengthFt}ft`;
+  } else if (maxLengthFt !== null) {
+    lengthFilterText = `Max ${maxLengthFt}ft`;
+  }
+
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[calc(100vh-10rem)] p-4 md:p-8 relative overflow-hidden">
       {isClient && hasActiveFilters && (
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 transform mb-4 py-2 px-4 text-sm bg-background shadow rounded-md flex items-center gap-4">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 transform mb-4 py-2 px-4 text-sm bg-background shadow rounded-md flex flex-wrap justify-center items-center gap-2 md:gap-4">
           {userLocation && (
             <Badge variant="outline" className="flex items-center">
               <MapPin className="h-4 w-4 mr-1.5 text-primary" />
@@ -132,10 +159,16 @@ export default function HomePage() {
               Types: <strong className="ml-1">{boatPreferences.join(', ')}</strong>
             </Badge>
           )}
+          {lengthFilterText && (
+            <Badge variant="outline" className="flex items-center">
+                <Ruler className="h-4 w-4 mr-1.5 text-primary" />
+                Length: <strong className="ml-1">{lengthFilterText}</strong>
+            </Badge>
+          )}
         </div>
       )}
       {currentListing ? (
-        <div className={cn("transition-all duration-500", hasActiveFilters ? "mt-12 md:mt-16" : "mt-0")}> {/* Add margin-top if badge is shown */}
+        <div className={cn("transition-all duration-500 w-full", hasActiveFilters ? "mt-12 md:mt-16" : "mt-0")}>
             <ListingCard
             key={currentListing.id + '-' + currentIndex} 
             listing={currentListing}
@@ -150,7 +183,7 @@ export default function HomePage() {
             You've Seen It All!
           </h2>
           <p className="text-muted-foreground mb-6 max-w-md mx-auto">
-            {userLocation || boatPreferences.length > 0 
+            {hasActiveFilters 
               ? `You've explored all listings matching your current preferences.` 
               : "You've explored all available listings."}
             {' '}Check back later for new additions, review your liked items, or adjust your profile settings.
@@ -164,7 +197,7 @@ export default function HomePage() {
               Reset Interactions
             </Button>
           </div>
-           {isClient && (userLocation || boatPreferences.length > 0) && (
+           {isClient && hasActiveFilters && (
              <p className="text-xs text-muted-foreground mt-6">
                Want to see more? You can adjust your <Link href="/profile" className="underline hover:text-primary">profile settings</Link>.
              </p>
@@ -174,3 +207,5 @@ export default function HomePage() {
     </div>
   );
 }
+
+    
