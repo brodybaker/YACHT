@@ -1,10 +1,12 @@
+
 import Link from 'next/link';
-import { Anchor, Heart, MessageSquare, Menu, HomeIcon } from 'lucide-react';
+import { Anchor, Heart, MessageSquare, Menu, HomeIcon, PlusSquare } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
 const navItems = [
   { href: '/', label: 'Discover', icon: HomeIcon },
+  { href: '/add-listing', label: 'Add Listing', icon: PlusSquare },
   { href: '/liked', label: 'Liked', icon: Heart },
   { href: '/messages', label: 'Messages', icon: MessageSquare },
 ];
@@ -19,10 +21,10 @@ export default function Header() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-2">
+        <nav className="hidden md:flex items-center gap-1">
           {navItems.map((item) => (
             <Button key={item.label} variant="ghost" asChild>
-              <Link href={item.href} className="flex items-center gap-2 text-foreground hover:text-primary">
+              <Link href={item.href} className="flex items-center gap-2 text-foreground hover:text-primary px-3 py-2">
                 <item.icon className="h-5 w-5" />
                 {item.label}
               </Link>
@@ -47,7 +49,7 @@ export default function Header() {
                 </Link>
                 {navItems.map((item) => (
                   <Button key={item.label} variant="ghost" className="w-full justify-start" asChild>
-                    <Link href={item.href} className="flex items-center gap-3 text-lg">
+                    <Link href={item.href} className="flex items-center gap-3 text-lg py-3">
                       <item.icon className="h-5 w-5" />
                       {item.label}
                     </Link>
@@ -61,3 +63,5 @@ export default function Header() {
     </header>
   );
 }
+
+    
