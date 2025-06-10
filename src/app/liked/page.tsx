@@ -5,11 +5,12 @@ import { useState, useEffect } from 'react';
 import type { Listing } from '@/types';
 import { mockListings } from '@/lib/mockData';
 import LikedItemCard from '@/components/listing/LikedItemCard';
-import ListingDetailModal from '@/components/listing/ListingDetailModal'; // Import the new modal
+import ListingDetailModal from '@/components/listing/ListingDetailModal';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { Card } from '@/components/ui/card'; // Import Card
+import { Card } from '@/components/ui/card';
 import { Heart, HeartCrack, Sailboat, UserCircle, LogIn, UserPlus } from 'lucide-react';
+import OnboardingModal from '@/components/onboarding/OnboardingModal';
 
 export default function LikedPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -17,12 +18,14 @@ export default function LikedPage() {
   const [likedListings, setLikedListings] = useState<Listing[]>([]);
   const [dislikedListingsState, setDislikedListingsState] = useState<Listing[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-
-  // State for the modal
   const [selectedListingForModal, setSelectedListingForModal] = useState<Listing | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  
+  const [showOnboardingModal, setShowOnboardingModal] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    setIsClient(true);
     const likedIds = ['listing1', 'listing3', 'listing5'];
     const fetchedLikedListings = mockListings.filter(listing => likedIds.includes(listing.id));
     setLikedListings(fetchedLikedListings);
@@ -36,6 +39,17 @@ export default function LikedPage() {
 
   const handleSignIn = () => {
     setIsAuthenticated(true);
+    if (isClient) {
+      const onboardingCompleted = localStorage.getItem('nauticalMatch_onboardingCompleted');
+      if (onboardingCompleted !== 'true') {
+        setShowOnboardingModal(true);
+      }
+    }
+  };
+
+  const handleCloseOnboarding = () => {
+    setShowOnboardingModal(false);
+    // The modal itself handles setting localStorage on finish/skip
   };
 
   const handleOpenModal = (listing: Listing) => {
@@ -45,8 +59,6 @@ export default function LikedPage() {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    // Optionally reset selectedListingForModal after animation
-    // setTimeout(() => setSelectedListingForModal(null), 300);
   };
 
   if (!isAuthenticated) {
@@ -125,7 +137,7 @@ export default function LikedPage() {
               <LikedItemCard
                 key={listing.id}
                 listing={listing}
-                onNameClick={() => handleOpenModal(listing)} // Pass handler to card
+                onNameClick={() => handleOpenModal(listing)}
               />
             ))}
           </div>
@@ -155,6 +167,12 @@ export default function LikedPage() {
         isOpen={isModalOpen}
         onClose={handleCloseModal}
       />
+      {isClient && (
+        <OnboardingModal
+          isOpen={showOnboardingModal}
+          onClose={handleCloseOnboarding}
+        />
+      )}
     </>
   );
 }
