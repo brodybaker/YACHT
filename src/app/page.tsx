@@ -64,7 +64,7 @@ export default function HomePage() {
           listing={currentListing}
           onLike={handleLike}
           onDislike={handleDislike}
-          className="transition-all duration-300 ease-out"
+          // className="transition-all duration-300 ease-out" // Removed this line
         />
       ) : (
         <div className="text-center p-10 bg-card shadow-xl rounded-lg">
