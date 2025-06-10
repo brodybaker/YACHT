@@ -3,7 +3,7 @@ export interface User {
   id: string;
   name: string;
   avatarUrl?: string;
-  location?: string; // Optional: User's preferred location
+  // location?: string; // Removed as per user request
 }
 
 export interface Listing {
@@ -13,15 +13,29 @@ export interface Listing {
   price: number;
   imageUrls: string[];
   videoUrl?: string;
-  location: string; // e.g., "Miami, FL", "Monaco" - For filtering
-  lengthFt: number; // LOA (Length Overall)
-  type: string; // e.g., "Motor Yacht", "Sailboat", "Catamaran"
-  manufacturer?: string; // e.g., "Beneteau", "Sunseeker"
-  year: number; // YearManufactured
+  location: string; 
+  lengthFt: number; 
+  type: string; 
+  manufacturer?: string;
+  year: number; 
   cabins?: number;
-  fuelType?: string; // e.g., "Diesel", "Gasoline"
+  fuelType?: string; 
   postedBy: User;
   postedDate: string; // ISO date string
+
+  // Fields from IYBA example integration
+  VesselName?: string;
+  AskingPrice?: string; // Note: IYBA has this as string, we use number for price
+  SaleClassCode?: string; // e.g., "PW" (Power) "SA" (Sail)
+  BoatCategoryCode?: string; // e.g., "MY" (Motor Yacht)
+  MakeString?: string; // Manufacturer
+  ModelYear?: number;
+  LengthOverall?: number; // In feet
+  Images?: { URI: string; Order: number }[];
+  OfficeName?: string; // Broker office
+  OfficeContactName?: string; // Broker name
+  CreatedDate?: string; // Date listed
+  CabinsCountNumeric?: number;
 }
 
 export interface Message {

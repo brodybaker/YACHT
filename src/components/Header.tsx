@@ -1,7 +1,7 @@
 
 'use client';
 import Link from 'next/link';
-import { Anchor, Heart, MessageSquare, Menu, HomeIcon, PlusSquare, CircleUserRound, MapPin } from 'lucide-react';
+import { Anchor, Heart, MessageSquare, Menu, HomeIcon, PlusSquare, CircleUserRound } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import {
@@ -12,11 +12,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useLocation } from '@/contexts/LocationContext';
-import { mockListings } from '@/lib/mockData'; // Assuming mockListings is accessible client-side
-import { useEffect, useMemo } from 'react';
-
 
 const mainNavItems = [
   { href: '/', label: 'Discover', icon: HomeIcon },
@@ -29,25 +24,11 @@ const accountNavItems = [
 ];
 
 export default function Header() {
-  const { selectedLocation, setSelectedLocation, availableLocations, setAvailableLocations } = useLocation();
-
-  const uniqueLocations = useMemo(() => {
-    const locations = new Set(mockListings.map(listing => listing.location));
-    return Array.from(locations).sort();
-  }, []);
-
-  useEffect(() => {
-    setAvailableLocations(uniqueLocations);
-  }, [uniqueLocations, setAvailableLocations]);
-
   const allNavItemsForMobile = [
     ...mainNavItems,
     { type: 'separator', key: 'sep1' },
     ...accountNavItems,
-    { type: 'separator', key: 'sep2' },
-    // Add location select for mobile if needed, or handle differently
   ];
-
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -67,19 +48,6 @@ export default function Header() {
             </Button>
           ))}
           
-          <Select value={selectedLocation || "all"} onValueChange={(value) => setSelectedLocation(value === "all" ? null : value)}>
-            <SelectTrigger className="w-[180px] text-sm h-9 px-3 py-2 ml-2 focus:ring-primary">
-              <MapPin className="h-4 w-4 mr-1 text-muted-foreground" />
-              <SelectValue placeholder="Location" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All Locations</SelectItem>
-              {availableLocations.map(loc => (
-                <SelectItem key={loc} value={loc}>{loc}</SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="flex items-center gap-2 text-foreground hover:text-primary px-3 py-2 ml-1">
@@ -117,23 +85,6 @@ export default function Header() {
                   <span className="font-headline text-xl font-bold text-primary">NauticalMatch</span>
                 </Link>
                 
-                <div className="mb-4">
-                  <span className="text-sm font-medium text-muted-foreground px-1">Location</span>
-                   <Select value={selectedLocation || "all"} onValueChange={(value) => setSelectedLocation(value === "all" ? null : value)}>
-                    <SelectTrigger className="w-full mt-1 text-base h-11">
-                      <MapPin className="h-5 w-5 mr-2 text-muted-foreground" />
-                      <SelectValue placeholder="Select Location" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All Locations</SelectItem>
-                      {availableLocations.map(loc => (
-                        <SelectItem key={loc} value={loc}>{loc}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-
-
                 {allNavItemsForMobile.map((item) => {
                   if (item.type === 'separator') {
                     return <DropdownMenuSeparator key={item.key} className="my-2"/>;
