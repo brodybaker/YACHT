@@ -138,12 +138,22 @@ export default function ListingCard({ listing, onLike, onDislike, className }: L
             <div className="absolute top-2 right-2 z-10">
               <Button
                   variant="outline"
-                  size="icon"
+                  size="sm"
                   onClick={() => setShowDetailsPanel(!showDetailsPanel)}
-                  className="bg-black/30 hover:bg-black/50 border-none text-white"
-                  aria-label={showDetailsPanel ? "Close details" : "View details"}
+                  className="bg-black/40 hover:bg-black/60 border-none text-white shadow-md"
+                  aria-label={showDetailsPanel ? "Close details panel" : "Open details panel"}
                 >
-                  {showDetailsPanel ? <PanelRightClose className="h-5 w-5" /> : <PanelRightOpen className="h-5 w-5" />}
+                  {showDetailsPanel ? (
+                    <>
+                      <PanelRightClose />
+                      Less
+                    </>
+                  ) : (
+                    <>
+                      <PanelRightOpen />
+                      More
+                    </>
+                  )}
                 </Button>
             </div>
             <div className="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/70 to-transparent">
