@@ -108,16 +108,22 @@ export default function OnboardingModal({ isOpen, onClose }: OnboardingModalProp
             </p>
         </div>
 
-        <DialogFooter className="p-6 pt-4 flex flex-row justify-between sm:justify-between items-center border-t">
-          {currentStep === onboardingSteps.length - 1 ? (
-             <div className="w-[120px]"></div> // Placeholder to maintain layout, same width as skip button
-          ) : (
-            <Button variant="ghost" onClick={handleSkip} className="text-muted-foreground hover:text-foreground w-[120px] justify-start px-2">
+        <DialogFooter className="p-6 pt-4 flex flex-row justify-between items-center border-t">
+          <div className="w-[120px]"> {/* Wrapper for left side item (Skip button or placeholder) */}
+            {currentStep === onboardingSteps.length - 1 ? (
+              null // This div acts as a 120px wide horizontal spacer when Skip button is not shown
+            ) : (
+              <Button 
+                variant="ghost" 
+                onClick={handleSkip} 
+                className="text-muted-foreground hover:text-foreground w-full justify-start px-2" // Button takes full width of its 120px parent
+              >
                 Skip Tutorial
-            </Button>
-          )}
+              </Button>
+            )}
+          </div>
           
-          <div className="flex gap-2">
+          <div className="flex gap-2"> {/* Wrapper for right side items (action buttons) */}
             {currentStep > 0 && (
               <Button variant="outline" onClick={handlePrev}>
                 <ArrowLeft className="h-4 w-4 sm:mr-2" />
@@ -139,3 +145,4 @@ export default function OnboardingModal({ isOpen, onClose }: OnboardingModalProp
     </Dialog>
   );
 }
+
