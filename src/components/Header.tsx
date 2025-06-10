@@ -1,7 +1,7 @@
 
 'use client';
 import Link from 'next/link';
-import { Anchor, Heart, MessageSquare, Menu, HomeIcon, PlusSquare, CircleUserRound, Info, Building } from 'lucide-react';
+import { Heart, MessageSquare, Menu, HomeIcon, PlusSquare, CircleUserRound, Info, Building } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import {
@@ -37,7 +37,7 @@ export default function Header() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between relative">
         <Link href="/" className="flex items-center gap-2" aria-label="YachtMob Home">
-          <Anchor className="h-8 w-8 text-primary" />
+          
           <span className="font-headline text-2xl font-bold text-primary">YachtMob</span>
         </Link>
 
@@ -84,7 +84,7 @@ export default function Header() {
             <SheetContent side="right" className="w-[280px] p-6">
               <nav className="flex flex-col gap-2">
                 <Link href="/" className="flex items-center gap-2 mb-4" aria-label="YachtMob Home">
-                  <Anchor className="h-7 w-7 text-primary" />
+                  
                   <span className="font-headline text-xl font-bold text-primary">YachtMob</span>
                 </Link>
                 
