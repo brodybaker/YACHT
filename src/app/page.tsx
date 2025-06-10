@@ -168,9 +168,9 @@ export default function HomePage() {
         </div>
       )}
       {currentListing ? (
-        <div className={cn("transition-all duration-500 w-full", hasActiveFilters ? "mt-12 md:mt-16" : "mt-0")}>
+        <div className={cn("w-full", hasActiveFilters ? "mt-12 md:mt-16" : "mt-0")}>
             <ListingCard
-            key={currentListing.id + '-' + currentIndex} 
+            key={currentListing.id} 
             listing={currentListing}
             onLike={handleLike}
             onDislike={handleDislike}

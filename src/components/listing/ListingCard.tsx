@@ -26,7 +26,7 @@ export default function ListingCard({ listing, onLike, onDislike, className }: L
     // Reset state when listing changes
     setCurrentMediaIndex(0);
     setShowVideo(!!listing.videoUrl);
-    setAnimate('animate-slide-in'); // Trigger entry animation for new card
+    setAnimate('animate-slide-in'); // Trigger entry animation for new card content
 
     const timer = setTimeout(() => setAnimate(''), 300); // Clear animation class after it finishes
     return () => clearTimeout(timer);
@@ -45,7 +45,8 @@ export default function ListingCard({ listing, onLike, onDislike, className }: L
       } else {
         onDislike(listing.id);
       }
-      // The parent component will change the listing, triggering useEffect for slide-in
+      // The parent component will change the listing prop for this card,
+      // which then triggers the useEffect above to slide in the new content.
     }, 300); // Match animation duration
   };
   
@@ -78,13 +79,13 @@ export default function ListingCard({ listing, onLike, onDislike, className }: L
 
   return (
     <div className={cn(
-      'relative mx-auto w-full transition-all duration-300 ease-in-out max-w-2xl',
+      'relative mx-auto w-full max-w-2xl', // Removed: transition-all duration-300 ease-in-out
       className,
       animate
     )}>
       <div className="flex w-full">
         <Card className={cn(
-          'shadow-xl overflow-hidden flex-shrink-0 transition-all duration-300 ease-in-out flex flex-col w-full rounded-lg'
+          'shadow-xl overflow-hidden flex-shrink-0 flex flex-col w-full rounded-lg' // Removed: transition-all duration-300 ease-in-out
         )}>
           <CardHeader className="p-0 relative">
             <div className="aspect-video w-full bg-muted relative overflow-hidden">
@@ -164,3 +165,4 @@ export default function ListingCard({ listing, onLike, onDislike, className }: L
     </div>
   );
 }
+
