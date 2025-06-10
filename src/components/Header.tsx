@@ -28,7 +28,7 @@ export default function Header() {
     ...mainNavItems,
     { type: 'separator', key: 'sep1' },
     ...accountNavItems,
-     { type: 'separator', key: 'sep2' }, // Added separator for about links
+     { type: 'separator', key: 'sep2' },
     { href: '/about', label: 'About NauticalMatch', icon: Info },
     { href: '/about-yachtrow', label: 'About YachtRow', icon: Building },
   ];
@@ -41,7 +41,7 @@ export default function Header() {
           <span className="font-headline text-2xl font-bold text-primary">NauticalMatch</span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-1 md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2">
+        <nav className="hidden md:inline-flex items-center gap-1 md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2">
           {mainNavItems.map((item) => (
             <Button key={item.label} variant="ghost" asChild>
               <Link href={item.href} className="flex items-center gap-2 text-foreground hover:text-primary px-3 py-2">
