@@ -9,7 +9,7 @@ import MessageBubble from '@/components/messaging/MessageBubble';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Send, ArrowLeft, Ship, UserCircle, LogIn } from 'lucide-react';
+import { Send, ArrowLeft, Ship, UserCircle, LogIn, UserPlus } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -36,7 +36,7 @@ export default function ChatPage() {
   useEffect(() => {
     // In a real app, check actual auth status.
     // For demo, setIsAuthenticated(true) can be used to bypass the prompt.
-    
+
     if (isAuthenticated) {
       const foundCurrentUser = mockUsers.find(u => u.id === DEMO_CURRENT_USER_ID);
       setCurrentUser(foundCurrentUser || null);
@@ -50,7 +50,7 @@ export default function ChatPage() {
       setIsLoading(false); // Don't try to load chat data if not auth'd
       return;
     }
-    
+
     // Ensure currentUser is set before proceeding
     if (!currentUser || !otherUserIdFromQuery) {
         setIsLoading(false);
@@ -60,7 +60,7 @@ export default function ChatPage() {
 
     const foundListing = mockListings.find(l => l.id === listingId);
     const foundOtherUser = mockUsers.find(u => u.id === otherUserIdFromQuery);
-    
+
     if (foundListing && foundOtherUser) {
       setListing(foundListing);
       setOtherUser(foundOtherUser);
@@ -98,7 +98,7 @@ export default function ChatPage() {
     setMessages(prevMessages => [...prevMessages, messageToSend]);
     setNewMessage('');
   };
-  
+
   const handleSignIn = () => {
     setIsAuthenticated(true); // Simulate successful sign-in
   };
@@ -108,19 +108,24 @@ export default function ChatPage() {
       <div className="flex flex-col items-center justify-center h-[calc(100vh-8rem)] bg-card shadow-xl rounded-lg overflow-hidden p-8 text-center">
         <Card className="w-full max-w-md p-8 shadow-xl">
             <UserCircle className="h-20 w-20 text-primary mx-auto mb-6" />
-            <h2 className="font-headline text-3xl font-semibold text-foreground mb-4">Sign In Required</h2>
+            <h2 className="font-headline text-3xl font-semibold text-foreground mb-4">Join the Conversation</h2>
             <p className="text-muted-foreground mb-8">
-            Please sign in to send and receive messages.
+            Sign in or sign up to send and receive messages.
             </p>
-            <Button size="lg" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground" onClick={handleSignIn}>
+            <Button size="lg" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground mb-4" onClick={handleSignIn}>
                 <LogIn className="mr-2 h-5 w-5" />
-                Sign In to Chat
+                Sign In
+            </Button>
+            <p className="text-sm text-muted-foreground mb-2">New to NauticalMatch?</p>
+            <Button size="lg" variant="outline" className="w-full" onClick={handleSignIn}>
+                <UserPlus className="mr-2 h-5 w-5" />
+                Sign Up
             </Button>
         </Card>
       </div>
     );
   }
-  
+
   if (isLoading || (isAuthenticated && (!listing || !otherUser || !currentUser))) {
     return (
       <div className="text-center py-12 flex flex-col items-center justify-center h-[calc(100vh-8rem)]">
@@ -129,7 +134,7 @@ export default function ChatPage() {
       </div>
     );
   }
-  
+
   // Fallback if data is missing after loading and authenticated
   if (!listing || !otherUser || !currentUser) {
     return (
@@ -206,4 +211,3 @@ export default function ChatPage() {
     </div>
   );
 }
-

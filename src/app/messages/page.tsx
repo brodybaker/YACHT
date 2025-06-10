@@ -7,7 +7,7 @@ import { mockConversations } from '@/lib/mockData';
 import ConversationItem from '@/components/messaging/ConversationItem';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { MessageSquareText, Sailboat, UserCircle, Search, LogIn } from 'lucide-react';
+import { MessageSquareText, Sailboat, UserCircle, Search, LogIn, UserPlus } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
 
@@ -21,7 +21,7 @@ export default function MessagesPage() {
   useEffect(() => {
     // In a real app, check actual auth status.
     // For demo, setIsAuthenticated(true) can be used to bypass the prompt.
-    
+
     // Simulate fetching conversations only if authenticated (or for demo purposes)
     if (isAuthenticated || !process.env.NODE_ENV || process.env.NODE_ENV === 'development') { // Allow loading in dev for easier testing
         setConversations(mockConversations);
@@ -33,7 +33,7 @@ export default function MessagesPage() {
     setIsAuthenticated(true); // Simulate successful sign-in
   };
 
-  const filteredConversations = conversations.filter(convo => 
+  const filteredConversations = conversations.filter(convo =>
     convo.listing.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     convo.otherUser.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     convo.lastMessage.content.toLowerCase().includes(searchTerm.toLowerCase())
@@ -44,13 +44,18 @@ export default function MessagesPage() {
       <div className="flex flex-col items-center justify-center min-h-[calc(100vh-12rem)] text-center p-8">
         <Card className="w-full max-w-md p-8 shadow-xl">
             <UserCircle className="h-20 w-20 text-primary mx-auto mb-6" />
-            <h2 className="font-headline text-3xl font-semibold text-foreground mb-4">Sign In Required</h2>
+            <h2 className="font-headline text-3xl font-semibold text-foreground mb-4">Access Your Messages</h2>
             <p className="text-muted-foreground mb-8">
-            Please sign in to view your messages and communicate with other users.
+            Sign in or create an account to view your messages and communicate with other users.
             </p>
-            <Button size="lg" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground" onClick={handleSignIn}>
+            <Button size="lg" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground mb-4" onClick={handleSignIn}>
                 <LogIn className="mr-2 h-5 w-5" />
-                Sign In to View Messages
+                Sign In
+            </Button>
+            <p className="text-sm text-muted-foreground mb-2">First time here?</p>
+             <Button size="lg" variant="outline" className="w-full" onClick={handleSignIn}>
+                <UserPlus className="mr-2 h-5 w-5" />
+                Sign Up
             </Button>
         </Card>
       </div>
@@ -77,7 +82,7 @@ export default function MessagesPage() {
         </div>
          <div className="relative w-full md:w-auto">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-          <Input 
+          <Input
             type="search"
             placeholder="Search messages..."
             className="pl-10 w-full md:w-72"

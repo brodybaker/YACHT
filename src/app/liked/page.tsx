@@ -9,7 +9,7 @@ import ListingDetailModal from '@/components/listing/ListingDetailModal'; // Imp
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Card } from '@/components/ui/card'; // Import Card
-import { Heart, HeartCrack, Sailboat, UserCircle, LogIn } from 'lucide-react';
+import { Heart, HeartCrack, Sailboat, UserCircle, LogIn, UserPlus } from 'lucide-react';
 
 export default function LikedPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -27,7 +27,7 @@ export default function LikedPage() {
     const fetchedLikedListings = mockListings.filter(listing => likedIds.includes(listing.id));
     setLikedListings(fetchedLikedListings);
 
-    const dislikedIds = ['listing2', 'listing4']; 
+    const dislikedIds = ['listing2', 'listing4'];
     const fetchedDislikedListings = mockListings.filter(listing => dislikedIds.includes(listing.id));
     setDislikedListingsState(fetchedDislikedListings);
 
@@ -54,13 +54,18 @@ export default function LikedPage() {
       <div className="flex flex-col items-center justify-center min-h-[calc(100vh-12rem)] text-center p-8">
         <Card className="w-full max-w-md p-8 shadow-xl">
           <UserCircle className="h-20 w-20 text-primary mx-auto mb-6" />
-          <h2 className="font-headline text-3xl font-semibold text-foreground mb-4">Sign In Required</h2>
+          <h2 className="font-headline text-3xl font-semibold text-foreground mb-4">Access Your Account</h2>
           <p className="text-muted-foreground mb-8">
-            Please sign in to view your liked and disliked listings, and to manage your preferences.
+            Sign in to view your liked and disliked listings, and to manage your preferences.
           </p>
-          <Button size="lg" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground" onClick={handleSignIn}>
+          <Button size="lg" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground mb-4" onClick={handleSignIn}>
             <LogIn className="mr-2 h-5 w-5" />
-            Sign In to Continue
+            Sign In
+          </Button>
+          <p className="text-sm text-muted-foreground mb-2">Don't have an account?</p>
+          <Button size="lg" variant="outline" className="w-full" onClick={handleSignIn}>
+            <UserPlus className="mr-2 h-5 w-5" />
+            Sign Up
           </Button>
         </Card>
       </div>
@@ -78,7 +83,7 @@ export default function LikedPage() {
 
   const listingsToShow = viewMode === 'liked' ? likedListings : dislikedListingsState;
   const PageTitle = viewMode === 'liked' ? "Your Liked Listings" : "Your Disliked Listings";
-  const PageDescription = viewMode === 'liked' 
+  const PageDescription = viewMode === 'liked'
     ? "Here are the boats and yachts you've shown interest in."
     : "These are the listings you've previously dismissed. You can review them here.";
   const EmptyStateIcon = viewMode === 'liked' ? Heart : HeartCrack;
@@ -96,15 +101,15 @@ export default function LikedPage() {
         </div>
 
         <div className="flex flex-col sm:flex-row justify-center md:justify-start gap-3 mb-6">
-          <Button 
-            variant={viewMode === 'liked' ? 'default' : 'outline'} 
+          <Button
+            variant={viewMode === 'liked' ? 'default' : 'outline'}
             onClick={() => setViewMode('liked')}
             className={`w-full sm:w-auto ${viewMode === 'liked' ? 'bg-primary hover:bg-primary/90 text-primary-foreground' : 'text-foreground'}`}
           >
             <Heart className="mr-2 h-5 w-5" /> Liked ({likedListings.length})
           </Button>
-          <Button 
-            variant={viewMode === 'disliked' ? 'destructive' : 'outline'} 
+          <Button
+            variant={viewMode === 'disliked' ? 'destructive' : 'outline'}
             onClick={() => setViewMode('disliked')}
             className={`w-full sm:w-auto ${viewMode === 'disliked' ? 'bg-destructive hover:bg-destructive/90 text-destructive-foreground' : 'text-foreground'}`}
           >
@@ -115,9 +120,9 @@ export default function LikedPage() {
         {listingsToShow.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {listingsToShow.map((listing) => (
-              <LikedItemCard 
-                key={listing.id} 
-                listing={listing} 
+              <LikedItemCard
+                key={listing.id}
+                listing={listing}
                 onNameClick={() => handleOpenModal(listing)} // Pass handler to card
               />
             ))}
@@ -143,10 +148,10 @@ export default function LikedPage() {
           </div>
         )}
       </div>
-      <ListingDetailModal 
-        listing={selectedListingForModal} 
-        isOpen={isModalOpen} 
-        onClose={handleCloseModal} 
+      <ListingDetailModal
+        listing={selectedListingForModal}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
       />
     </>
   );
