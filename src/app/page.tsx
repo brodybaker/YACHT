@@ -6,9 +6,10 @@ import type { Listing } from '@/types';
 import { mockListings } from '@/lib/mockData';
 import ListingCard from '@/components/listing/ListingCard';
 import { Button } from '@/components/ui/button';
-import { RotateCcw, ThumbsUp, MapPin, Info, Sailboat, Filter } from 'lucide-react';
+import { RotateCcw, ThumbsUp, MapPin, Sailboat, Filter } from 'lucide-react';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
+import { cn } from '@/lib/utils'; // Added missing import
 
 const BOAT_TYPES = ['Sailboat', 'Motor Yacht', 'Catamaran', 'Speedboat', 'Fishing Boat'] as const;
 
