@@ -53,9 +53,11 @@ export default function MessagesPage() {
                 Sign In
             </Button>
             <p className="text-sm text-muted-foreground mb-2">First time here?</p>
-             <Button size="lg" variant="outline" className="w-full" onClick={handleSignIn}>
-                <UserPlus className="mr-2 h-5 w-5" />
-                Sign Up
+             <Button size="lg" variant="outline" className="w-full" asChild>
+                <Link href="/signup">
+                  <UserPlus className="mr-2 h-5 w-5" />
+                  Sign Up
+                </Link>
             </Button>
         </Card>
       </div>
