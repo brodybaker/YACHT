@@ -15,7 +15,7 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useToast } from '@/hooks/use-toast';
-import { UserPlus, ShieldCheck, MailOpen, Loader2 } from 'lucide-react';
+import { UserPlus, ShieldCheck, MailOpen, Loader2, Briefcase } from 'lucide-react';
 
 const signUpSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
@@ -169,15 +169,24 @@ export default function SignUpPage() {
             </form>
           </Form>
         </CardContent>
-        <CardFooter className="flex justify-center">
+        <CardFooter className="flex flex-col items-center gap-4 pt-6">
           <p className="text-sm text-muted-foreground">
             Already have an account?{' '}
             <Button variant="link" asChild className="p-0 h-auto">
               <Link href="/liked">
-                <span>Sign In</span> {/* Assuming /liked is a gateway to auth for now */}
+                <span>Sign In</span>
               </Link>
             </Button>
           </p>
+          <div className="border-t w-full pt-4 text-center">
+             <p className="text-sm text-muted-foreground mb-2">Are you a broker?</p>
+             <Button variant="outline" asChild className="text-sm">
+                <Link href="/broker-application">
+                  <Briefcase className="mr-2 h-4 w-4" />
+                  Apply for a Broker Account
+                </Link>
+             </Button>
+          </div>
         </CardFooter>
       </Card>
     </div>
