@@ -1,15 +1,30 @@
 
 import Link from 'next/link';
-import { Anchor, Heart, MessageSquare, Menu, HomeIcon, PlusSquare } from 'lucide-react';
+import { Anchor, Heart, MessageSquare, Menu, HomeIcon, PlusSquare, Info, Building, CircleUserRound } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
-const navItems = [
+const mainNavItems = [
   { href: '/', label: 'Discover', icon: HomeIcon },
   { href: '/add-listing', label: 'Add Listing', icon: PlusSquare },
+  { href: '/about', label: 'About', icon: Info },
+  { href: '/about-yachtrow', label: 'About YachtRow', icon: Building },
+];
+
+const accountNavItems = [
   { href: '/liked', label: 'Liked', icon: Heart },
   { href: '/messages', label: 'Messages', icon: MessageSquare },
 ];
+
+const allNavItemsForMobile = [...mainNavItems, ...accountNavItems];
 
 export default function Header() {
   return (
@@ -22,7 +37,7 @@ export default function Header() {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-1">
-          {navItems.map((item) => (
+          {mainNavItems.map((item) => (
             <Button key={item.label} variant="ghost" asChild>
               <Link href={item.href} className="flex items-center gap-2 text-foreground hover:text-primary px-3 py-2">
                 <item.icon className="h-5 w-5" />
@@ -30,6 +45,26 @@ export default function Header() {
               </Link>
             </Button>
           ))}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="flex items-center gap-2 text-foreground hover:text-primary px-3 py-2">
+                <CircleUserRound className="h-5 w-5" />
+                Account
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-56">
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              {accountNavItems.map((item) => (
+                 <DropdownMenuItem key={item.label} asChild>
+                    <Link href={item.href} className="flex items-center gap-2 w-full">
+                      <item.icon className="h-4 w-4" />
+                      {item.label}
+                    </Link>
+                  </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
         </nav>
 
         {/* Mobile Navigation */}
@@ -47,7 +82,7 @@ export default function Header() {
                   <Anchor className="h-7 w-7 text-primary" />
                   <span className="font-headline text-xl font-bold text-primary">NauticalMatch</span>
                 </Link>
-                {navItems.map((item) => (
+                {allNavItemsForMobile.map((item) => (
                   <Button key={item.label} variant="ghost" className="w-full justify-start" asChild>
                     <Link href={item.href} className="flex items-center gap-3 text-lg py-3">
                       <item.icon className="h-5 w-5" />
@@ -63,5 +98,3 @@ export default function Header() {
     </header>
   );
 }
-
-    

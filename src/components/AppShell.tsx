@@ -1,5 +1,9 @@
+
 import type React from 'react';
 import Header from '@/components/Header';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import { Megaphone } from 'lucide-react';
 
 interface AppShellProps {
   children: React.ReactNode;
@@ -13,7 +17,15 @@ export default function AppShell({ children }: AppShellProps) {
         {children}
       </main>
       <footer className="py-6 text-center text-muted-foreground text-sm border-t">
-        <p>&copy; {new Date().getFullYear()} NauticalMatch. All rights reserved.</p>
+        <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p>&copy; {new Date().getFullYear()} NauticalMatch. All rights reserved.</p>
+          <Button variant="outline" asChild>
+            <Link href="/advertise">
+              <Megaphone className="mr-2 h-4 w-4" />
+              Advertise With Us
+            </Link>
+          </Button>
+        </div>
       </footer>
     </div>
   );
