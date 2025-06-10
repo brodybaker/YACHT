@@ -116,7 +116,7 @@ export default function ChatPage() {
                 <LogIn className="mr-2 h-5 w-5" />
                 Sign In
             </Button>
-            <p className="text-sm text-muted-foreground mb-2">New to NauticalMatch?</p>
+            <p className="text-sm text-muted-foreground mb-2">New to YachtMob?</p>
             <Button size="lg" variant="outline" className="w-full" asChild>
                 <Link href="/signup">
                   <UserPlus className="mr-2 h-5 w-5" />
@@ -172,12 +172,12 @@ export default function ChatPage() {
         </div>
         <Link href={`/listing/${listing.id}`} className="ml-auto shrink-0">
            <Image
-              src={listing.imageUrls[0] || `https://placehold.co/100x75.png?text=Boat`}
+              src={listing.imageUrls[0] || 'https://placehold.co/100x75.png'}
               alt={listing.name}
               width={50}
               height={37.5}
               className="rounded object-cover border"
-              data-ai-hint="boat yacht"
+              data-ai-hint="boat yacht thumbnail"
             />
         </Link>
       </header>

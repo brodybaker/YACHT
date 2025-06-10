@@ -39,12 +39,12 @@ export default function ConversationItem({ conversation }: ConversationItemProps
           {new Date(lastMessage.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
           <div className="mt-1">
             <Image
-              src={listing.imageUrls[0] || `https://placehold.co/100x75.png?text=Boat`}
+              src={listing.imageUrls[0] || 'https://placehold.co/100x75.png'}
               alt={listing.name}
               width={60}
               height={45}
               className="rounded object-cover"
-              data-ai-hint="boat yacht"
+              data-ai-hint="boat yacht thumbnail"
             />
           </div>
         </div>

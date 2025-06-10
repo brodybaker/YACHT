@@ -16,7 +16,7 @@ export default function AboutYachtRowPage() {
         </CardHeader>
         <CardContent className="space-y-6 text-foreground/90 leading-relaxed">
           <p>
-            YachtRow is the innovative company behind NauticalMatch, dedicated to revolutionizing the maritime marketplace.
+            YachtRow is the innovative company behind YachtMob, dedicated to revolutionizing the maritime marketplace.
             Founded by a team of passionate boating enthusiasts and technology experts, YachtRow aims to leverage cutting-edge
             solutions to enhance the experience of buying, selling, and owning marine vessels.
           </p>
@@ -29,7 +29,7 @@ export default function AboutYachtRowPage() {
           <h2 className="text-2xl font-semibold text-foreground pt-4">Technology and Innovation</h2>
           <p>
             We are committed to employing the latest technological advancements, including AI-driven insights, secure
-            transaction frameworks, and intuitive user interfaces, to provide an unparalleled service. NauticalMatch
+            transaction frameworks, and intuitive user interfaces, to provide an unparalleled service. YachtMob
             is our flagship product, embodying our commitment to excellence in the marine industry.
           </p>
           <p>

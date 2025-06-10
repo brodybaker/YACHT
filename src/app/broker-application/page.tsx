@@ -23,7 +23,7 @@ export default function BrokerApplicationPage() {
         </CardHeader>
         <CardContent className="space-y-6 text-foreground/90 leading-relaxed text-center">
           <p>
-            Thank you for your interest in listing a premium vessel on NauticalMatch. Due to the nature of listings
+            Thank you for your interest in listing a premium vessel on YachtMob. Due to the nature of listings
             for boats over 26ft or priced above $50,000, we require a brief application process to ensure the quality
             and accuracy of these listings.
           </p>
@@ -34,12 +34,12 @@ export default function BrokerApplicationPage() {
             Currently, this application process is handled manually.
           </p>
           <p>
-            Please contact our support team at <a href="mailto:support@nauticalmatch.example.com" className="text-primary underline hover:text-primary/80">support@nauticalmatch.example.com</a> with
+            Please contact our support team at <a href="mailto:support@yachtmob.example.com" className="text-primary underline hover:text-primary/80">support@yachtmob.example.com</a> with
             the subject "Broker Account Application" and include details about your vessel and dealership (if applicable).
             We will get back to you shortly.
           </p>
           <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground" asChild>
-            <a href="mailto:support@nauticalmatch.example.com?subject=Broker Account Application">
+            <a href="mailto:support@yachtmob.example.com?subject=Broker Account Application">
               Email Support
             </a>
           </Button>
@@ -48,5 +48,3 @@ export default function BrokerApplicationPage() {
     </div>
   );
 }
-
-    

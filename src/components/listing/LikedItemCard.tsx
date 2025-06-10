@@ -20,7 +20,7 @@ export default function LikedItemCard({ listing, onNameClick }: LikedItemCardPro
         <div onClick={() => onNameClick(listing)} className="cursor-pointer">
           <div className="aspect-video w-full bg-muted relative">
             <Image
-              src={listing.imageUrls[0] || `https://placehold.co/400x300.png?text=${listing.name}`}
+              src={listing.imageUrls[0] || 'https://placehold.co/400x300.png'}
               alt={listing.name}
               width={400}
               height={225}

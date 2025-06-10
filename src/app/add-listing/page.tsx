@@ -145,7 +145,7 @@ export default function AddListingPage() {
           <UserCircle className="h-20 w-20 text-primary mx-auto mb-6" />
           <h2 className="font-headline text-3xl font-semibold text-foreground mb-4">Add Your Listing</h2>
           <p className="text-muted-foreground mb-8">
-            Sign in to create and manage your boat or yacht listings on NauticalMatch.
+            Sign in to create and manage your boat or yacht listings on YachtMob.
           </p>
           <Button size="lg" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground mb-4" onClick={handleSignIn}>
             <LogIn className="mr-2 h-5 w-5" />
@@ -398,5 +398,3 @@ export default function AddListingPage() {
     </div>
   );
 }
-
-    

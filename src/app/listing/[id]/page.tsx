@@ -75,7 +75,7 @@ export default function ListingDetailPage() {
               <video
                 key={listing.id + '-video-detail'}
                 src={listing.videoUrl}
-                poster={listing.imageUrls[0] || `https://placehold.co/800x600.png?text=${listing.name}`}
+                poster={listing.imageUrls[0] || 'https://placehold.co/800x600.png'}
                 controls
                 autoPlay
                 muted
@@ -108,7 +108,7 @@ export default function ListingDetailPage() {
           )}
           {listing.imageUrls.length === 0 && !listing.videoUrl && (
              <div className="aspect-video w-full flex items-center justify-center bg-muted">
-              <Ship className="w-24 h-24 text-muted-foreground" />
+              <Image src="https://placehold.co/800x600.png" alt="Placeholder boat" layout="fill" objectFit="contain" data-ai-hint="boat placeholder" />
             </div>
           )}
         </CardHeader>

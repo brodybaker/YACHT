@@ -92,7 +92,7 @@ export default function ListingCard({ listing, onLike, onDislike, className }: L
                 <video
                   key={listing.id + '-video'}
                   src={listing.videoUrl}
-                  poster={listing.imageUrls[0] || `https://placehold.co/800x450.png?text=${listing.name}`}
+                  poster={listing.imageUrls[0] || 'https://placehold.co/800x450.png'}
                   controls
                   autoPlay
                   muted
@@ -112,7 +112,7 @@ export default function ListingCard({ listing, onLike, onDislike, className }: L
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center bg-muted">
-                  <Ship className="w-24 h-24 text-muted-foreground" />
+                   <Image src="https://placehold.co/800x450.png" alt="Placeholder boat" layout="fill" objectFit="contain" data-ai-hint="boat placeholder" />
                 </div>
               )}
               {(listing.videoUrl || listing.imageUrls.length > 1) && (

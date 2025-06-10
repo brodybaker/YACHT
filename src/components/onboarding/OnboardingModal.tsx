@@ -37,7 +37,7 @@ const onboardingSteps: OnboardingStep[] = [
   {
     icon: CheckCircle,
     title: "You're All Set!",
-    description: 'Explore NauticalMatch and find your perfect vessel. Happy sailing!',
+    description: 'Explore YachtMob and find your perfect vessel. Happy sailing!',
   },
 ];
 
@@ -70,14 +70,14 @@ export default function OnboardingModal({ isOpen, onClose }: OnboardingModalProp
 
   const handleFinish = () => {
     if (isMounted) {
-      localStorage.setItem('nauticalMatch_onboardingCompleted', 'true');
+      localStorage.setItem('yachtmob_onboardingCompleted', 'true');
     }
     onClose();
   };
 
   const handleSkip = () => {
     if (isMounted) {
-      localStorage.setItem('nauticalMatch_onboardingCompleted', 'true');
+      localStorage.setItem('yachtmob_onboardingCompleted', 'true');
     }
     onClose();
   };

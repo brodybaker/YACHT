@@ -5,7 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import AppShell from '@/components/AppShell';
 
 export const metadata: Metadata = {
-  title: 'NauticalMatch',
+  title: 'YachtMob',
   description: 'Find your perfect yacht or boat.',
 };
 

@@ -2,11 +2,11 @@
 import type { User, Listing, Message, Conversation } from '@/types';
 
 export const mockUsers: User[] = [
-  { id: 'user1', name: 'Alice Skipper', avatarUrl: 'https://placehold.co/100x100.png?text=AS' , location: 'Miami, FL'},
-  { id: 'user2', name: 'Bob Deckhand', avatarUrl: 'https://placehold.co/100x100.png?text=BD', location: 'Monaco' },
-  { id: 'user3', name: 'Captain Charlie', avatarUrl: 'https://placehold.co/100x100.png?text=CC', location: 'San Diego, CA' },
-  { id: 'user4', name: 'Diana Sailmaker', avatarUrl: 'https://placehold.co/100x100.png?text=DS', location: 'Phuket, Thailand' },
-  { id: 'user5', name: 'Evan Navigator', avatarUrl: 'https://placehold.co/100x100.png?text=EN', location: 'New York, NY' },
+  { id: 'user1', name: 'Alice Skipper', avatarUrl: 'https://placehold.co/100x100.png' },
+  { id: 'user2', name: 'Bob Deckhand', avatarUrl: 'https://placehold.co/100x100.png' },
+  { id: 'user3', name: 'Captain Charlie', avatarUrl: 'https://placehold.co/100x100.png' },
+  { id: 'user4', name: 'Diana Sailmaker', avatarUrl: 'https://placehold.co/100x100.png' },
+  { id: 'user5', name: 'Evan Navigator', avatarUrl: 'https://placehold.co/100x100.png' },
 ];
 
 export const mockListings: Listing[] = [
@@ -16,9 +16,9 @@ export const mockListings: Listing[] = [
     description: 'Experience ultimate luxury on the Azure Dream. Perfect for family getaways or corporate events. Spacious decks, modern amenities, and breathtaking views await.',
     price: 1200000,
     imageUrls: [
-      'https://placehold.co/800x600.png?text=Yacht+View+1',
-      'https://placehold.co/800x600.png?text=Yacht+Interior',
-      'https://placehold.co/800x600.png?text=Deck+Area',
+      'https://placehold.co/800x600.png',
+      'https://placehold.co/800x600.png',
+      'https://placehold.co/800x600.png',
     ],
     videoUrl: 'https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
     location: 'Monaco',
@@ -37,9 +37,9 @@ export const mockListings: Listing[] = [
     description: 'A robust sailboat built for adventure. Fully equipped for long voyages, offering a true sailing experience with comfortable living quarters.',
     price: 350000,
     imageUrls: [
-      'https://placehold.co/800x600.png?text=Sailboat+1',
-      'https://placehold.co/800x600.png?text=Sailboat+Cabin',
-      'https://placehold.co/800x600.png?text=Sailboat+Deck',
+      'https://placehold.co/800x600.png',
+      'https://placehold.co/800x600.png',
+      'https://placehold.co/800x600.png',
     ],
     videoUrl: 'https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
     location: 'Miami, FL',
@@ -58,9 +58,9 @@ export const mockListings: Listing[] = [
     description: 'Feel the thrill of speed with the SunChaser! Ideal for day trips, water sports, and coastal exploration. Powerful engine and sleek design.',
     price: 150000,
     imageUrls: [
-      'https://placehold.co/800x600.png?text=Speedboat+Side',
-      'https://placehold.co/800x600.png?text=Speedboat+Cockpit',
-      'https://placehold.co/800x600.png?text=Speedboat+Action',
+      'https://placehold.co/800x600.png',
+      'https://placehold.co/800x600.png',
+      'https://placehold.co/800x600.png',
     ],
     // No video for this one
     location: 'Miami, FL',
@@ -78,9 +78,9 @@ export const mockListings: Listing[] = [
     description: 'The perfect companion for your fishing expeditions. Ample storage, rod holders, and a stable platform for the serious angler.',
     price: 85000,
     imageUrls: [
-      'https://placehold.co/800x600.png?text=Fishing+Boat',
-      'https://placehold.co/800x600.png?text=Fishing+Gear',
-      'https://placehold.co/800x600.png?text=Boat+On+Water',
+      'https://placehold.co/800x600.png',
+      'https://placehold.co/800x600.png',
+      'https://placehold.co/800x600.png',
     ],
     videoUrl: 'https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
     location: 'San Diego, CA',
@@ -98,9 +98,9 @@ export const mockListings: Listing[] = [
     description: 'Spacious and stable, this catamaran offers unparalleled comfort and room for entertainment. Ideal for cruising with family and friends.',
     price: 750000,
     imageUrls: [
-      'https://placehold.co/800x600.png?text=Catamaran+Front',
-      'https://placehold.co/800x600.png?text=Catamaran+Saloon',
-      'https://placehold.co/800x600.png?text=Catamaran+Trampoline',
+      'https://placehold.co/800x600.png',
+      'https://placehold.co/800x600.png',
+      'https://placehold.co/800x600.png',
     ],
     location: 'Phuket, Thailand',
     lengthFt: 45,
@@ -118,8 +118,8 @@ export const mockListings: Listing[] = [
     description: 'A classic motor yacht, perfect for cruising the Mediterranean. Timeless design and modern comforts.',
     price: 950000,
     imageUrls: [
-      'https://placehold.co/800x600.png?text=Riviera+1',
-      'https://placehold.co/800x600.png?text=Riviera+2',
+      'https://placehold.co/800x600.png',
+      'https://placehold.co/800x600.png',
     ],
     videoUrl: 'https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4',
     location: 'Monaco',
@@ -138,7 +138,7 @@ export const mockListings: Listing[] = [
     description: 'Compact and agile, ideal for exploring city waterways and enjoying quick escapes.',
     price: 65000,
     imageUrls: [
-      'https://placehold.co/800x600.png?text=Hudson+Runner',
+      'https://placehold.co/800x600.png',
     ],
     location: 'New York, NY',
     lengthFt: 22,

@@ -34,7 +34,7 @@ export default function ListingDetailModal({ listing, isOpen, onClose }: Listing
         items.push({
           type: 'video',
           url: listing.videoUrl,
-          thumbnailUrl: listing.imageUrls[0] || `https://placehold.co/100x75.png?text=Video`,
+          thumbnailUrl: listing.imageUrls[0] || 'https://placehold.co/100x75.png',
           altText: `${listing.name} video`,
         });
       }
@@ -84,7 +84,7 @@ export default function ListingDetailModal({ listing, isOpen, onClose }: Listing
                     loop
                     className="w-full h-full object-cover"
                     data-ai-hint="boat video"
-                    poster={listing.imageUrls[0]}
+                    poster={listing.imageUrls[0] || 'https://placehold.co/800x450.png'}
                   />
                 ) : (
                   <Image
@@ -170,4 +170,3 @@ export default function ListingDetailModal({ listing, isOpen, onClose }: Listing
     </Dialog>
   );
 }
-

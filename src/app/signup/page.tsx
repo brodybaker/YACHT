@@ -67,7 +67,7 @@ export default function SignUpPage() {
         <CardHeader className="text-center">
           <UserPlus className="h-16 w-16 text-primary mx-auto mb-4" />
           <CardTitle className="font-headline text-3xl">Create Your Account</CardTitle>
-          <CardDescription>Join NauticalMatch and find your dream boat today.</CardDescription>
+          <CardDescription>Join YachtMob and find your dream boat today.</CardDescription>
         </CardHeader>
         <CardContent>
           <Form {...form}>

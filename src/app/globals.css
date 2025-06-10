@@ -87,7 +87,7 @@ body {
   }
   body {
     @apply text-foreground;
-    background-image: url('https://placehold.co/1920x1080.png');
+    background-image: url('https://placehold.co/1920x1080.png'); /* data-ai-hint="ocean sailing" */
     background-size: cover;
     background-position: center;
     background-attachment: fixed;

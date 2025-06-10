@@ -16,14 +16,14 @@ export default function AdvertisePage() {
         </CardHeader>
         <CardContent className="space-y-6 text-foreground/90 leading-relaxed text-center">
           <p>
-            Showcase your brand, products, or services to the vibrant NauticalMatch community. We offer a variety of
+            Showcase your brand, products, or services to the vibrant YachtMob community. We offer a variety of
             advertising opportunities to connect you with potential customers actively engaged in the marine lifestyle.
           </p>
           <p>
             Whether you are a boat manufacturer, gear supplier, marine service provider, or offer related lifestyle products,
-            NauticalMatch provides a targeted platform to enhance your visibility.
+            YachtMob provides a targeted platform to enhance your visibility.
           </p>
-          <h2 className="text-xl font-semibold text-foreground pt-2">Why Advertise on NauticalMatch?</h2>
+          <h2 className="text-xl font-semibold text-foreground pt-2">Why Advertise on YachtMob?</h2>
           <ul className="list-disc list-inside text-left max-w-md mx-auto space-y-1">
             <li>Targeted Audience: Connect directly with boat buyers, sellers, and enthusiasts.</li>
             <li>Brand Exposure: Increase your brand's visibility within the maritime community.</li>
@@ -37,7 +37,7 @@ export default function AdvertisePage() {
             We're excited to help you make waves!
           </p>
           <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground" asChild>
-            <a href="mailto:advertising@nauticalmatch.example.com?subject=Advertising Inquiry">
+            <a href="mailto:advertising@yachtmob.example.com?subject=Advertising Inquiry">
               <Mail className="mr-2 h-5 w-5" />
               Contact Advertising Team
             </a>

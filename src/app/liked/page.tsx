@@ -40,7 +40,7 @@ export default function LikedPage() {
   const handleSignIn = () => {
     setIsAuthenticated(true);
     if (isClient) {
-      const onboardingCompleted = localStorage.getItem('nauticalMatch_onboardingCompleted');
+      const onboardingCompleted = localStorage.getItem('yachtmob_onboardingCompleted');
       if (onboardingCompleted !== 'true') {
         setShowOnboardingModal(true);
       }

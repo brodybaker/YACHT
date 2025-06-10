@@ -18,12 +18,12 @@ export default function AppShell({ children }: AppShellProps) {
       </main>
       <footer className="py-6 text-center text-muted-foreground text-sm border-t">
         <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p>&copy; {new Date().getFullYear()} NauticalMatch. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} YachtMob. All rights reserved.</p>
           <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
             <Button variant="outline" size="sm" asChild>
               <Link href="/about">
                 <Info className="mr-2 h-4 w-4" />
-                About NauticalMatch
+                About YachtMob
               </Link>
             </Button>
             <Button variant="outline" size="sm" asChild>

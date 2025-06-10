@@ -29,16 +29,16 @@ export default function Header() {
     { type: 'separator', key: 'sep1' },
     ...accountNavItems,
      { type: 'separator', key: 'sep2' },
-    { href: '/about', label: 'About NauticalMatch', icon: Info },
+    { href: '/about', label: 'About YachtMob', icon: Info },
     { href: '/about-yachtrow', label: 'About YachtRow', icon: Building },
   ];
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between relative">
-        <Link href="/" className="flex items-center gap-2" aria-label="NauticalMatch Home">
+        <Link href="/" className="flex items-center gap-2" aria-label="YachtMob Home">
           <Anchor className="h-8 w-8 text-primary" />
-          <span className="font-headline text-2xl font-bold text-primary">NauticalMatch</span>
+          <span className="font-headline text-2xl font-bold text-primary">YachtMob</span>
         </Link>
 
         <nav className="hidden md:inline-flex items-center gap-1">
@@ -83,9 +83,9 @@ export default function Header() {
             </SheetTrigger>
             <SheetContent side="right" className="w-[280px] p-6">
               <nav className="flex flex-col gap-2">
-                <Link href="/" className="flex items-center gap-2 mb-4" aria-label="NauticalMatch Home">
+                <Link href="/" className="flex items-center gap-2 mb-4" aria-label="YachtMob Home">
                   <Anchor className="h-7 w-7 text-primary" />
-                  <span className="font-headline text-xl font-bold text-primary">NauticalMatch</span>
+                  <span className="font-headline text-xl font-bold text-primary">YachtMob</span>
                 </Link>
                 
                 {allNavItemsForMobile.map((item) => {
