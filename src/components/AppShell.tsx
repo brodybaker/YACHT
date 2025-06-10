@@ -3,7 +3,7 @@ import type React from 'react';
 import Header from '@/components/Header';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { Megaphone, Info, Building } from 'lucide-react';
+import { Megaphone, Info, Building, Newspaper } from 'lucide-react';
 
 interface AppShellProps {
   children: React.ReactNode;
@@ -36,6 +36,12 @@ export default function AppShell({ children }: AppShellProps) {
               <Link href="/advertise">
                 <Megaphone className="mr-2 h-4 w-4" />
                 Advertise With Us
+              </Link>
+            </Button>
+            <Button variant="outline" size="sm" asChild>
+              <Link href="/blog">
+                <Newspaper className="mr-2 h-4 w-4" />
+                Blog
               </Link>
             </Button>
           </div>

@@ -1,7 +1,7 @@
 
 'use client';
 import Link from 'next/link';
-import { Heart, MessageSquare, Menu, HomeIcon, PlusSquare, CircleUserRound, Info, Building, Settings2 } from 'lucide-react';
+import { Heart, MessageSquare, Menu, HomeIcon, PlusSquare, CircleUserRound, Info, Building, Settings2, Newspaper } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import {
@@ -27,6 +27,7 @@ const accountNavItems = [
 const footerNavItemsForMobile = [
   { href: '/about', label: 'About YachtMob', icon: Info },
   { href: '/about-yachtrow', label: 'About YachtRow', icon: Building },
+  { href: '/blog', label: 'Blog', icon: Newspaper },
 ];
 
 export default function Header() {
