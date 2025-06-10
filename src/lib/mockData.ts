@@ -2,11 +2,11 @@
 import type { User, Listing, Message, Conversation } from '@/types';
 
 export const mockUsers: User[] = [
-  { id: 'user1', name: 'Alice Skipper', avatarUrl: 'https://placehold.co/100x100.png' },
-  { id: 'user2', name: 'Bob Deckhand', avatarUrl: 'https://placehold.co/100x100.png' },
-  { id: 'user3', name: 'Captain Charlie', avatarUrl: 'https://placehold.co/100x100.png' },
-  { id: 'user4', name: 'Diana Sailmaker', avatarUrl: 'https://placehold.co/100x100.png' },
-  { id: 'user5', name: 'Evan Navigator', avatarUrl: 'https://placehold.co/100x100.png' },
+  { id: 'user1', name: 'Alice Skipper', avatarUrl: 'https://placehold.co/100x100.png', location: 'Miami, FL' },
+  { id: 'user2', name: 'Bob Deckhand', avatarUrl: 'https://placehold.co/100x100.png', location: 'Monaco' },
+  { id: 'user3', name: 'Captain Charlie', avatarUrl: 'https://placehold.co/100x100.png', location: 'San Diego, CA' },
+  { id: 'user4', name: 'Diana Sailmaker', avatarUrl: 'https://placehold.co/100x100.png', location: 'Phuket, Thailand' },
+  { id: 'user5', name: 'Evan Navigator', avatarUrl: 'https://placehold.co/100x100.png', location: 'New York, NY' },
 ];
 
 export const mockListings: Listing[] = [
@@ -330,3 +330,4 @@ export { mockConversationsGenerated as mockConversations };
 // Note: The DEMO_CURRENT_USER_ID in add-listing, messages and messages/[id] pages will determine
 // who is 'self' and who is 'other'. The mock data is now more diverse.
 // The conversation unread count is a very basic simulation.
+

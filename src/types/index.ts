@@ -3,7 +3,7 @@ export interface User {
   id: string;
   name: string;
   avatarUrl?: string;
-  // location?: string; // Removed as per user request
+  location?: string; // Added user location
 }
 
 export interface Listing {
@@ -13,13 +13,13 @@ export interface Listing {
   price: number;
   imageUrls: string[];
   videoUrl?: string;
-  location: string; 
-  lengthFt: number; 
-  type: string; 
+  location: string;
+  lengthFt: number;
+  type: string;
   manufacturer?: string;
-  year: number; 
+  year: number;
   cabins?: number;
-  fuelType?: string; 
+  fuelType?: string;
   postedBy: User;
   postedDate: string; // ISO date string
 

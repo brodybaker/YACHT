@@ -15,13 +15,14 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useToast } from '@/hooks/use-toast';
-import { UserPlus, ShieldCheck, MailOpen, Loader2, Briefcase } from 'lucide-react';
+import { UserPlus, ShieldCheck, MailOpen, Loader2, Briefcase, MapPin } from 'lucide-react';
 
 const signUpSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
   email: z.string().email({ message: 'Please enter a valid email address.' }),
   phoneNumber: z.string().min(10, { message: 'Phone number must be at least 10 digits.' })
     .regex(/^\+?[1-9]\d{1,14}$/, { message: 'Please enter a valid phone number (e.g., +1234567890).' }),
+  location: z.string().min(2, { message: 'Location must be at least 2 characters.'}).max(50, { message: 'Location must be 50 characters or less.'}),
   agreeToTerms: z.boolean().refine((val) => val === true, {
     message: 'You must agree to the Terms of Service.',
   }),
@@ -41,6 +42,7 @@ export default function SignUpPage() {
       name: '',
       email: '',
       phoneNumber: '',
+      location: '',
       agreeToTerms: false,
       signUpForUpdates: false,
     },
@@ -50,13 +52,19 @@ export default function SignUpPage() {
     setIsSubmitting(true);
     console.log('Sign Up Submitted:', values);
 
-    // Simulate API call
+    // Simulate API call and storing user data
     await new Promise(resolve => setTimeout(resolve, 1500));
+
+    // For demo purposes, store user's location in localStorage
+    // In a real app, this would be part of the user's session/profile from the backend
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('yachtmob_userLocation', values.location);
+    }
 
     setIsSubmitting(false);
     toast({
       title: 'Account Created!',
-      description: 'Welcome aboard! You have successfully signed up.',
+      description: 'Welcome aboard! You have successfully signed up. Your location has been saved.',
     });
     router.push('/'); // Redirect to homepage
   }
@@ -107,6 +115,23 @@ export default function SignUpPage() {
                     <FormControl>
                       <Input type="tel" placeholder="e.g., +14155552671" {...field} />
                     </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="location"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="flex items-center">
+                      <MapPin className="mr-2 h-4 w-4 text-primary" />
+                      Your Location
+                    </FormLabel>
+                    <FormControl>
+                      <Input placeholder="e.g., Miami, FL or Monaco" {...field} />
+                    </FormControl>
+                    <FormDescription>This helps us show listings near you first.</FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -173,6 +198,7 @@ export default function SignUpPage() {
           <p className="text-sm text-muted-foreground">
             Already have an account?{' '}
             <Button variant="link" asChild className="p-0 h-auto">
+              {/* Assuming sign-in might be on liked page or a dedicated login page */}
               <Link href="/liked">
                 <span>Sign In</span>
               </Link>
@@ -194,11 +220,12 @@ export default function SignUpPage() {
 }
 
 // Dummy page for terms of service link to prevent 404
-export function TermsOfServicePage() {
-  return (
-    <div className="container mx-auto py-12 px-4">
-      <h1 className="text-3xl font-bold mb-4">Terms of Service</h1>
-      <p>This is a placeholder for the Terms of Service.</p>
-    </div>
-  );
-}
+// If this file already exists and is more substantial, this can be omitted.
+// export function TermsOfServicePage() {
+//   return (
+//     <div className="container mx-auto py-12 px-4">
+//       <h1 className="text-3xl font-bold mb-4">Terms of Service</h1>
+//       <p>This is a placeholder for the Terms of Service.</p>
+//     </div>
+//   );
+// }
