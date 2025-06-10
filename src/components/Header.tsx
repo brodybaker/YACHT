@@ -27,14 +27,14 @@ const allNavItemsForMobile = [...mainNavItems, ...accountNavItems];
 export default function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between">
+      <div className="container flex h-16 items-center justify-between relative">
         <Link href="/" className="flex items-center gap-2" aria-label="NauticalMatch Home">
           <Anchor className="h-8 w-8 text-primary" />
           <span className="font-headline text-2xl font-bold text-primary">NauticalMatch</span>
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-1">
+        {/* Desktop Navigation - Centered */}
+        <nav className="hidden md:flex items-center gap-1 md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2">
           {mainNavItems.map((item) => (
             <Button key={item.label} variant="ghost" asChild>
               <Link href={item.href} className="flex items-center gap-2 text-foreground hover:text-primary px-3 py-2">
