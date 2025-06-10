@@ -86,6 +86,22 @@ body {
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
+    background-image: url('https://placehold.co/1920x1080.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative; /* For pseudo-element positioning */
+  }
+
+  body::before {
+    content: "";
+    position: fixed; /* Covers the entire viewport */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: hsla(var(--background), 0.85); /* Use theme background with 85% opacity */
+    z-index: -1; /* Place it behind the body content */
   }
 }
