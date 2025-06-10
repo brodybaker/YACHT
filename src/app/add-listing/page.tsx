@@ -54,12 +54,12 @@ export default function AddListingPage() {
     defaultValues: {
       name: '',
       description: '',
-      price: undefined,
-      lengthFt: undefined,
+      price: '',
+      lengthFt: '',
       location: '',
       type: undefined,
-      year: undefined,
-      cabins: undefined,
+      year: '',
+      cabins: '',
       imageUrl1: '',
       imageUrl2: '',
       imageUrl3: '',
@@ -314,7 +314,7 @@ export default function AddListingPage() {
                   <FormItem>
                     <FormLabel>Number of Cabins (Optional)</FormLabel>
                     <FormControl>
-                      <Input type="number" placeholder="e.g., 2" {...field} onChange={e => field.onChange(parseInt(e.target.value, 10) || undefined)} />
+                      <Input type="number" placeholder="e.g., 2" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
