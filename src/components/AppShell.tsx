@@ -3,7 +3,7 @@ import type React from 'react';
 import Header from '@/components/Header';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { Megaphone } from 'lucide-react';
+import { Megaphone, Info, Building } from 'lucide-react';
 
 interface AppShellProps {
   children: React.ReactNode;
@@ -19,12 +19,26 @@ export default function AppShell({ children }: AppShellProps) {
       <footer className="py-6 text-center text-muted-foreground text-sm border-t">
         <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
           <p>&copy; {new Date().getFullYear()} NauticalMatch. All rights reserved.</p>
-          <Button variant="outline" asChild>
-            <Link href="/advertise">
-              <Megaphone className="mr-2 h-4 w-4" />
-              Advertise With Us
-            </Link>
-          </Button>
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
+            <Button variant="outline" size="sm" asChild>
+              <Link href="/about">
+                <Info className="mr-2 h-4 w-4" />
+                About NauticalMatch
+              </Link>
+            </Button>
+            <Button variant="outline" size="sm" asChild>
+              <Link href="/about-yachtrow">
+                <Building className="mr-2 h-4 w-4" />
+                About YachtRow
+              </Link>
+            </Button>
+            <Button variant="outline" size="sm" asChild>
+              <Link href="/advertise">
+                <Megaphone className="mr-2 h-4 w-4" />
+                Advertise With Us
+              </Link>
+            </Button>
+          </div>
         </div>
       </footer>
     </div>

@@ -1,6 +1,6 @@
 
 import Link from 'next/link';
-import { Anchor, Heart, MessageSquare, Menu, HomeIcon, PlusSquare, Info, Building, CircleUserRound } from 'lucide-react';
+import { Anchor, Heart, MessageSquare, Menu, HomeIcon, PlusSquare, CircleUserRound } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import {
@@ -15,8 +15,6 @@ import {
 const mainNavItems = [
   { href: '/', label: 'Discover', icon: HomeIcon },
   { href: '/add-listing', label: 'Add Listing', icon: PlusSquare },
-  { href: '/about', label: 'About', icon: Info },
-  { href: '/about-yachtrow', label: 'About YachtRow', icon: Building },
 ];
 
 const accountNavItems = [
