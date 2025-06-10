@@ -127,7 +127,7 @@ export default function ListingCard({ listing, onLike, onDislike, className }: L
               {(listing.videoUrl || listing.imageUrls.length > 1) && (
                 <>
                   {((showVideo && listing.imageUrls.length > 0) || (!showVideo && currentMediaIndex < listing.imageUrls.length -1) || (!showVideo && currentMediaIndex === listing.imageUrls.length-1 && listing.videoUrl)) && (
-                    <Button onClick={nextMedia} variant="outline" size="icon" className="absolute right-12 top-2 bg-black/30 hover:bg-black/50 border-none text-white"> <Maximize className="h-5 w-5 rotate-90" /> </Button>
+                    <Button onClick={nextMedia} variant="outline" size="icon" className="absolute right-28 top-2 bg-black/30 hover:bg-black/50 border-none text-white"> <Maximize className="h-5 w-5 rotate-90" /> </Button>
                   )}
                   {((!showVideo && currentMediaIndex > 0) || (!showVideo && currentMediaIndex === 0 && listing.videoUrl)) && (
                     <Button onClick={prevMedia} variant="outline" size="icon" className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 border-none text-white"> <Maximize className="h-5 w-5 -rotate-90" /> </Button>
@@ -140,17 +140,17 @@ export default function ListingCard({ listing, onLike, onDislike, className }: L
                   variant="outline"
                   size="sm"
                   onClick={() => setShowDetailsPanel(!showDetailsPanel)}
-                  className="bg-black/40 hover:bg-black/60 border-none text-white shadow-md"
+                  className="bg-black/40 hover:bg-black/60 border-none text-white shadow-md flex items-center"
                   aria-label={showDetailsPanel ? "Close details panel" : "Open details panel"}
                 >
                   {showDetailsPanel ? (
                     <>
-                      <PanelRightClose />
+                      <PanelRightClose className="mr-1 h-4 w-4" />
                       Less
                     </>
                   ) : (
                     <>
-                      <PanelRightOpen />
+                      <PanelRightOpen className="mr-1 h-4 w-4" />
                       More
                     </>
                   )}
