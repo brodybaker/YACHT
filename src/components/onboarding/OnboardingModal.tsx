@@ -17,7 +17,7 @@ const onboardingSteps: OnboardingStep[] = [
   {
     icon: Search,
     title: 'Discover Your Dream Boat',
-    description: "On the 'Discover' page, swipe or use buttons to like (❤️) or pass (❌) on boat listings. Click the 'More' button (panel icon) on a card to expand a details panel, or click 'Go to Full Page' in that panel to see even more information.",
+    description: "On the 'Discover' page, use the buttons to like (❤️) or pass (❌) on boat listings. To view more details, like a listing and find it on your 'Liked' page, then navigate to its full detail page.",
   },
   {
     icon: Heart,
@@ -145,4 +145,3 @@ export default function OnboardingModal({ isOpen, onClose }: OnboardingModalProp
     </Dialog>
   );
 }
-
