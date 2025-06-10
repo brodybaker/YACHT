@@ -1,7 +1,7 @@
 
 'use client';
 import Link from 'next/link';
-import { Anchor, Heart, MessageSquare, Menu, HomeIcon, PlusSquare, CircleUserRound } from 'lucide-react';
+import { Anchor, Heart, MessageSquare, Menu, HomeIcon, PlusSquare, CircleUserRound, Info, Building } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import {
@@ -28,6 +28,9 @@ export default function Header() {
     ...mainNavItems,
     { type: 'separator', key: 'sep1' },
     ...accountNavItems,
+     { type: 'separator', key: 'sep2' }, // Added separator for about links
+    { href: '/about', label: 'About NauticalMatch', icon: Info },
+    { href: '/about-yachtrow', label: 'About YachtRow', icon: Building },
   ];
 
   return (
@@ -50,7 +53,7 @@ export default function Header() {
           
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="flex items-center gap-2 text-foreground hover:text-primary px-3 py-2 ml-1">
+              <Button variant="ghost" className="flex items-center gap-2 text-foreground hover:text-primary px-3 py-2">
                 <CircleUserRound className="h-5 w-5" />
                 Account
               </Button>
